@@ -1,12 +1,12 @@
 {
   "name": "koishi-plugin-openai-chatgpt",
   "author": "Sky390",
+  "version": "1.2.0",
   "description": "A ChatGPT robot that calls the official API and supports agents.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sky390/koishi-plugin-openai-chatgpt"
   },
-  "version": "1.0.4",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -33,10 +33,6 @@
     }
   },
   "dependencies": {
-    "@evertech/chatgpt-patched": "^5.0.5-patched.0",
-    "cgpt": "^3.5.5-test-1",
-    "chatgpt": "^5.0.6",
-    "chatgpt-api-client": "^1.0.5",
-    "custom-gpt-api": "^4.8.3"
+    "openai": "^3.2.1"
   }
 }
