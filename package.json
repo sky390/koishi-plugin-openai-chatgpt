@@ -1,0 +1,42 @@
+{
+  "name": "koishi-plugin-openai-chatgpt",
+  "author": "Sky390",
+  "description": "A ChatGPT robot that calls the official API and supports agents.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sky390/koishi-plugin-openai-chatgpt"
+  },
+  "version": "1.0.4",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "license": "AGPL-3.0-only",
+  "scripts": {},
+  "keywords": [
+    "chatgpt",
+    "koishi",
+    "plugin",
+    "ai",
+    "generate"
+  ],
+  "peerDependencies": {
+    "koishi": "^4.11.5"
+  },
+  "koishi": {
+    "browser": true,
+    "description": {
+      "en": "A ChatGPT robot that calls the official API and supports agents.",
+      "zh": "一个调用官方 API 的 ChatGPT 机器人，支持代理。"
+    }
+  },
+  "dependencies": {
+    "@evertech/chatgpt-patched": "^5.0.5-patched.0",
+    "cgpt": "^3.5.5-test-1",
+    "chatgpt": "^5.0.6",
+    "chatgpt-api-client": "^1.0.5",
+    "custom-gpt-api": "^4.8.3"
+  }
+}
