@@ -1,4 +1,4 @@
-import { Context, Schema, Session } from 'koishi'
+import { h, Context, Schema, Session } from 'koishi'
 import { Configuration, OpenAIApi } from 'openai';
 import {} from 'koishi-plugin-puppeteer'
 
@@ -42,20 +42,30 @@ export async function apply(ctx: Context, config: Config) {
   
   const openai = new OpenAIApi(configuration);
 
-  //console.log(openai);
-  //const response = await openai.listEngines();
-  //console.log(response.data);
-
   ctx.before('send', async (session) => {
     if (config.pictureMode === true) {
-      const html = `<html style="width: 200px; height: 0px; background: 'white'; word-wrap: break-word; white-space: pre-wrap;">
-        <div> ${ session.content.replace(/\n/g, '<br>').replace(/<\/*template>/g, '') } </div>
+      const html = `
+      <html>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
+      <style> body { background-color: white; } </style>
+      <div class="toast show" id="message">
+        <div class="toast-header">
+          <span class="avatar avatar-xs me-2" style="background-image: url(https://pic.sky390.cn/pics/2023/03/09/6409690ebc4df.png)"></span>
+          <strong class="me-auto">ChatGPT</strong>
+        </div>
+        <div class="toast-body">
+          ${ session.content.replace(/\n/g, '<br>').replace(/<\/*template>/g, '') }
+        </div>
+      </div>
+      <script>
+        const message = document.getElementById('message');
+        document.getElementsByTagName('html')[0].style.height = message.offsetHeight;
+        document.getElementsByTagName('html')[0].style.width = message.offsetWidth;
+      </script>
       </html>`;
-      //console.log(ctx.puppeteer);
       session.content = await ctx.puppeteer.render(html);
     }
   })
-
   ctx.command(config.triggerWord + ' <message:text>').action(async ({ session }, message) => {
     const q = message;
     session.send("查询中，请耐心等待...");
@@ -70,7 +80,6 @@ export async function apply(ctx: Context, config: Config) {
         presence_penalty: config.presencePenalty,
         stop: config.stop,
       });
-      //console.log(completion);
       return completion.data.choices[0].message.content;
     } catch (error) {
       if (error.response) {
